@@ -24,6 +24,7 @@ namespace MVC_Web_App.Controllers
             Price = 275M
         };
 
+        IValueCalculator calc;
 
         // GET: Home
         public ActionResult Index()
@@ -67,6 +68,23 @@ namespace MVC_Web_App.Controllers
             ninject.Bind<IValueCalculator>().To<LinqValueCalculator>();
 
             IValueCalculator calc = ninject.Get<IValueCalculator>();
+            ShoppingCart cart = new ShoppingCart(calc) { Products = products };
+            decimal totalValue = cart.CalculateProductTotal();
+
+            return View(totalValue);
+        }
+
+        //Added a Ninject DependancyResolver class to the Models folder
+        //This will bind the IValueCalculator to the LinqValueCalculator
+        //also added a bit of code to instantiate the dependency resolver
+        //A default constructor is added
+        public HomeController(IValueCalculator calcParam)
+        {
+            calc = calcParam;
+        }
+
+        public ActionResult CalcualateDIWithResolver()
+        {
             ShoppingCart cart = new ShoppingCart(calc) { Products = products };
             decimal totalValue = cart.CalculateProductTotal();
 

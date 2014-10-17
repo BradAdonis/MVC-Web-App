@@ -53,6 +53,7 @@ namespace MVC_Web_App.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            System.Web.Mvc.DependencyResolver.SetResolver(new Models.NinjectDependancyResolver(kernel));
         }        
     }
 }
