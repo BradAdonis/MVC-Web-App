@@ -55,10 +55,11 @@ namespace MVC_Web_App.Controllers
         //old way without dependency injection
         public ActionResult Calculations()
         {
-            IValueCalculator calc = new LinqValueCalculator();
-            ShoppingCart cart = new ShoppingCart(calc) { Products = products};
-            decimal totalValue = cart.CalculateProductTotal();
-            return View(totalValue);
+            //IValueCalculator calc = new LinqValueCalculator();
+            //ShoppingCart cart = new ShoppingCart(calc) { Products = products};
+            //decimal totalValue = cart.CalculateProductTotal();
+            //return View(totalValue);
+            return View();
         }
 
         //new method using dependancy injection

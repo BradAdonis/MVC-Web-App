@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Ninject;
+using Ninject.Web.Common;
 using System.Web.Mvc;
 
 namespace MVC_Web_App.Models
@@ -31,6 +32,9 @@ namespace MVC_Web_App.Models
         {
             kernel.Bind<IValueCalculator>().To<LinqValueCalculator>();
             kernel.Bind<IDiscountHelper>().To<DefaultDiscountHelper>().WithPropertyValue("DiscountSize",50M);
+
+            //change the scope of the binding
+            kernel.Bind<IValueCalculator>().To<LinqValueCalculator>().InRequestScope();
 
             //With another constructor
             //kernel.Bind<IDiscountHelper>().To<DefaultDiscountHelper>().WithConstructorArgument("discountParam", 50M);
